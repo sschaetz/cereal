@@ -165,6 +165,23 @@ namespace cereal
         itsXML.clear();
       }
 
+      // ######################################################################
+      //! Creates a name value pair
+      /*! @relates NameValuePair */
+      template <class T> static inline
+      NameValuePair<T> make_nvp( std::string const & name, T && value )
+      {
+        return {name.c_str(), std::forward<T>(value)};
+      }
+
+      //! Creates a name value pair
+      /*! @relates NameValuePair */
+      template <class T> static inline
+      NameValuePair<T> make_nvp( const char * name, T && value )
+      {
+        return {name, std::forward<T>(value)};
+      }
+
       //! Saves some binary data, encoded as a base64 string, with an optional name
       /*! This can be called directly by users and it will automatically create a child node for
           the current XML node, populate it with a base64 encoded string, and optionally name
@@ -413,6 +430,23 @@ namespace cereal
       }
 
       ~XMLInputArchive() CEREAL_NOEXCEPT = default;
+
+      // ######################################################################
+      //! Creates a name value pair
+      /*! @relates NameValuePair */
+      template <class T> static inline
+      NameValuePair<T> make_nvp( std::string const & name, T && value )
+      {
+        return {name.c_str(), std::forward<T>(value)};
+      }
+
+      //! Creates a name value pair
+      /*! @relates NameValuePair */
+      template <class T> static inline
+      NameValuePair<T> make_nvp( const char * name, T && value )
+      {
+        return {name, std::forward<T>(value)};
+      }
 
       //! Loads some binary data, encoded as a base64 string, optionally specified by some name
       /*! This will automatically start and finish a node to load the data, and can be called directly by
