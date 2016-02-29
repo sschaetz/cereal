@@ -29,6 +29,10 @@
 #ifndef CEREAL_CEREAL_HPP_
 #define CEREAL_CEREAL_HPP_
 
+#ifndef CEREAL_CLASS_VERSION_IDENTIFIER
+#define CEREAL_CLASS_VERSION_IDENTIFIER "cereal_class_version"
+#endif
+
 #include <type_traits>
 #include <string>
 #include <memory>
@@ -498,7 +502,7 @@ namespace cereal
           detail::StaticObject<detail::Versions>::getInstance().find( hash, detail::Version<T>::version );
 
         if( insertResult.second ) // insertion took place, serialize the version number
-          process( make_nvp("cereal_class_version", version) );
+          process( make_nvp(CEREAL_CLASS_VERSION_IDENTIFIER, version) );
 
         return version;
       }
@@ -895,7 +899,7 @@ namespace cereal
         {
           std::uint32_t version;
 
-          process( make_nvp("cereal_class_version", version) );
+          process( make_nvp(CEREAL_CLASS_VERSION_IDENTIFIER, version) );
           itsVersionedTypes.emplace_hint( lookupResult, hash, version );
 
           return version;
